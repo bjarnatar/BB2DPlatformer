@@ -1,0 +1,36 @@
+#Ignore everything from Library except the few files
+#defined on http://unity3d.com/support/documentation/Manual/ExternalVersionControlSystemSupport.html
+Library
+
+#Visual studio files
+*.suo
+*.csproj
+*.sln
+*.pidb
+*.user
+*.unityproj
+*.userprefs
+
+#Build output
+assetbundles/
+obj/
+[Bb]uild/
+[Tt]emp/
+
+#Maya temp files
+*.maya[Ss]watches*
+*.swatch
+
+#Misc
+/benchmark.log
+[Tt]humbs.db
+/SavedScreen.png
+/UpgradeLog*.XML
+_UpgradeReport_Files/
+.DS_Store
+*VostopiaApiSettings.asset
+*.pyc
+*.swp
+
+#cached data
+/vostopia/

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BaddieAttack : MonoBehaviour
 {
+	public int killScore = 10; // Score this baddie gives when killed
 
 	// Use this for initialization
 	void Start ()
@@ -23,6 +24,7 @@ public class BaddieAttack : MonoBehaviour
 			if (collision.transform.position.y - transform.position.y > 0.8f)
 			{ // Player wins, I die
 				Destroy(gameObject);
+				collision.gameObject.SendMessage("AddScore", killScore);
 			}
 			else
 			{

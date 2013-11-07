@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
 	
 	}
 	
+	// TODO - Do something more clever when out of lives
 	public void Die()
 	{
 		lives -= 1;

@@ -23,11 +23,11 @@ public class PlayerController : MonoBehaviour
 		// Sideways movement
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
-			transform.Translate(speed * Time.deltaTime, 0, 0);
+			transform.Translate(speed * Time.fixedDeltaTime, 0, 0);
 		}
 		else if (Input.GetKey(KeyCode.LeftArrow)) // The else means right arrow takes priority if both are pressed
 		{
-			transform.Translate(-speed * Time.deltaTime, 0, 0);
+			transform.Translate(-speed * Time.fixedDeltaTime, 0, 0);
 		}
 	}
 	

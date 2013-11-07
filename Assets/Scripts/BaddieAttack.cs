@@ -26,7 +26,7 @@ public class BaddieAttack : MonoBehaviour
 			}
 			else
 			{
-				Application.LoadLevel(0);
+				collision.gameObject.SendMessage("Die");
 			}
 		}
 		

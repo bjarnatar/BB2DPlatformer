@@ -11,11 +11,12 @@ public class PlayerController : MonoBehaviour
 	public int airJumpsAllowed = 1;
 	
 	private int airJumpCount = 0;
+	private Vector3 respawnPosition;
 
 	// Use this for initialization
 	void Start ()
 	{
-	
+		respawnPosition = transform.position;
 	}
 	
 	void FixedUpdate()
@@ -76,5 +77,11 @@ public class PlayerController : MonoBehaviour
 			return 1;
 		}
 		return 0; //@bjarnatar
+	}
+	
+	void Respawn()
+	{
+		transform.position = respawnPosition;
+		rigidbody.velocity = Vector3.zero;
 	}
 }

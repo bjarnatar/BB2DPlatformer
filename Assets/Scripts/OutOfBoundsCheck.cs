@@ -20,7 +20,7 @@ public class OutOfBoundsCheck : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			Application.LoadLevel(0);
+			other.gameObject.SendMessage("Die");
 		}
 	}
 }

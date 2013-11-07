@@ -30,8 +30,6 @@ public class BaddieAttack : MonoBehaviour
 			{
 				collision.gameObject.SendMessage("Die");
 			}
-		}
-		
-		
+		}		
 	}
 }

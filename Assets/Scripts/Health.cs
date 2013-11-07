@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
 		else
 		{
 			// You are out of lives, so you die
-			Application.LoadLevel(0);
+			Application.LoadLevel("LoseScene");
 		}
 	}
 	

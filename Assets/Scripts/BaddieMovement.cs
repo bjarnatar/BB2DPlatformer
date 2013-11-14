@@ -6,6 +6,7 @@ public class BaddieMovement : MonoBehaviour
 	public int movementDirection = -1;
 	public float movementSpeed = 5.0f;
 	public float lookDownDistance = 1.0f;
+	public float groundedTolerance = 0.1f;
 	
 	
 	// Use this for initialization
@@ -52,5 +53,10 @@ public class BaddieMovement : MonoBehaviour
 		{
 			return true; // The ray did not hit something, we do indeed have a drop ahead
 		}
+	}
+
+	bool IsGrounded()
+	{
+		return Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + groundedTolerance);
 	}
 }

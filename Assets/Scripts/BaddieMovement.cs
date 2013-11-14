@@ -27,9 +27,8 @@ public class BaddieMovement : MonoBehaviour
 		{
 			movementDirection = movementDirection * -1; // Can also be written as movementDirection *= -1;
 		}
-			
-			
-		transform.Translate(movementDirection * movementSpeed * Time.deltaTime, 0, 0, Space.World);
+
+		transform.Translate(movementDirection * movementSpeed * Time.fixedDeltaTime, 0, 0, Space.World);
 	}
 	
 	bool IsDropAhead()
@@ -55,8 +54,20 @@ public class BaddieMovement : MonoBehaviour
 		}
 	}
 
-	bool IsGrounded()
+	void OnCollisionStay(Collision collision)
 	{
-		return Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + groundedTolerance);
+		if (collision.gameObject.tag == "Platform")
+		{
+			transform.parent = collision.gameObject.transform;
+		}
 	}
+	
+	void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+		{
+			transform.parent = null;
+		}
+	}
+
 }

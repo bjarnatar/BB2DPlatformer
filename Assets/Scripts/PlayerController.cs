@@ -84,4 +84,22 @@ public class PlayerController : MonoBehaviour
 		transform.position = respawnPosition;
 		rigidbody.velocity = Vector3.zero;
 	}
+
+	void OnCollisionStay(Collision collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+		{
+			Debug.Log ("Parent Player");
+			transform.parent = collision.gameObject.transform;
+		}
+	}
+	
+	void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+		{
+			Debug.Log ("Player got off");
+			transform.parent = null;
+		}
+	}
 }

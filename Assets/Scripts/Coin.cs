@@ -25,6 +25,8 @@ public class Coin : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			other.gameObject.SendMessage("AddScore", score);
+			other.gameObject.SendMessage("PickedUpCoin");
+
 			if (pickupParticleEffect != null)
 			{
 				GameObject.Instantiate(pickupParticleEffect, transform.position, Quaternion.identity);

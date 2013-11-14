@@ -4,11 +4,14 @@ using System.Collections;
 public class Health : MonoBehaviour
 {
 	public int lives = 3;
+	public int coinsForExtraLife = 2;
+
+	private int coinsRemainingToNextLife;
 
 	// Use this for initialization
 	void Start ()
 	{
-	
+		coinsRemainingToNextLife = coinsForExtraLife;
 	}
 	
 	// Update is called once per frame
@@ -33,7 +36,18 @@ public class Health : MonoBehaviour
 			Application.LoadLevel("LoseScene");
 		}
 	}
-	
+
+	void PickedUpCoin()
+	{
+		coinsRemainingToNextLife--;
+		if (coinsRemainingToNextLife <= 0)
+		{
+			lives++;
+			Debug.Log ("You got an extra life! Play sound here");
+			coinsRemainingToNextLife = coinsForExtraLife;
+		}
+	}
+
 	public void OnGUI()
 	{
 		GUI.Label(new Rect(10, 10, 100, 20), "Lives left: " + lives);

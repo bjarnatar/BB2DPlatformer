@@ -42,20 +42,26 @@ public class PlayerController : MonoBehaviour
 		// Jump
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			if (IsGrounded() || NearWallDirection() != 0)
-			{
+			if (IsGrounded())
+			{ // Ground jump
 				rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 				airJumpCount = 0;
 			}
+			else if (NearWallDirection() != 0)
+			{ // Wall Jump
+				rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+				airJumpCount = 0;
+
+				// Add force in the opposite direction to where the wall is
+				rigidbody.AddForce(Vector3.left * NearWallDirection() * wallJumpSidewaysForce, ForceMode.Impulse);
+			}
 			else if (airJumpCount < airJumpsAllowed)
-			{
+			{ // Air Jump
 				rigidbody.velocity = Vector3.zero;
 				rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 				airJumpCount++;
 			}		
 			
-			// Add force in the opposite direction to where the wall is
-			rigidbody.AddForce(Vector3.left * NearWallDirection() * wallJumpSidewaysForce, ForceMode.Impulse);
 		}
 
 	}
@@ -89,7 +95,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Platform")
 		{
-			Debug.Log ("Parent Player");
 			transform.parent = collision.gameObject.transform;
 		}
 	}
@@ -98,7 +103,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Platform")
 		{
-			Debug.Log ("Player got off");
 			transform.parent = null;
 		}
 	}

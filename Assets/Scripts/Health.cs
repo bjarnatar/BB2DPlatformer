@@ -42,8 +42,8 @@ public class Health : MonoBehaviour
 		coinsRemainingToNextLife--;
 		if (coinsRemainingToNextLife <= 0)
 		{
+			//TODO Play sound on extra life
 			lives++;
-			Debug.Log ("You got an extra life! Play sound here");
 			coinsRemainingToNextLife = coinsForExtraLife;
 		}
 	}

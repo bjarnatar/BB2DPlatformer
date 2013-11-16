@@ -11,12 +11,11 @@ public class PlayerController : MonoBehaviour
 	public int airJumpsAllowed = 1;
 	
 	private int airJumpCount = 0;
-	private Vector3 respawnPosition;
 
 	// Use this for initialization
 	void Start ()
 	{
-		respawnPosition = transform.position;
+		DontDestroyOnLoad(gameObject); // This makes sure the player stays loaded between levels
 	}
 	
 	void FixedUpdate()
@@ -65,7 +64,28 @@ public class PlayerController : MonoBehaviour
 		}
 
 	}
-	
+
+	void OnLevelWasLoaded(int level)
+	{
+		SendMessage("Respawn");
+		SmoothFollow sf = Camera.main.GetComponent<SmoothFollow>();
+		if (sf != null)
+		{
+			sf.target = transform;
+		}
+	}
+
+	void Respawn()
+	{
+		GameObject spawner = GameObject.FindWithTag("Respawn");
+		if (spawner != null)
+		{
+			transform.position = spawner.transform.position;
+			transform.rotation = spawner.transform.rotation;
+			rigidbody.velocity = Vector3.zero;
+		}
+	}
+
 	bool IsGrounded()
 	{
 		return Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + jumpCollisionTolerance);
@@ -85,12 +105,6 @@ public class PlayerController : MonoBehaviour
 		return 0; //@bjarnatar
 	}
 	
-	void Respawn()
-	{
-		transform.position = respawnPosition;
-		rigidbody.velocity = Vector3.zero;
-	}
-
 	void OnCollisionStay(Collision collision)
 	{
 		if (collision.gameObject.tag == "Platform")
